@@ -1,7 +1,7 @@
 const util = require('util');
 
 //this package will be used to generate a unique id 
-const uuidv1 = require('uuidv');
+// const uuidv1 = require('uuidv');
 
 
 const readFileAsync = util.promisify(fs.readFile);
@@ -15,11 +15,41 @@ class Store {
     }
 
     write(note) {
-        return this.write('db/db.json', JSON.stringify(note))
+        return writeFileAsync('db/db.json', JSON.stringify(note))
     }
 
     //create a function to getNotes
+    getNotes() {
+        console.log("get notes");
+        return this.read()
+        .then(notes => {
+            let notesArr;
+            try {
+                notesArray = [].concat(JSON.parse(notes));
+            }
+            catch (err) {
+                notesArray = [];
+            }
+            return notesArray;
+        })
+    }
+    addNotes(note) {
+        console.log("add notes");
+        const title = note;
+        const name = note;
+        const newNote = { title, text, id: ++this.idDum }
+        return this.getNotes()
+            .then(notes => [...notes, newNote])
+            .then(updateNotes => this.write(updateNotes))
+            .then(() => newNote)
 
+    }
+    removeNote(id) {
+        console.log("remove notes");
+        return this.getNotes()
+            .then(notes => notes.filter(note => note.id !== parseInt(id)))
+            .then(updatedNotes => this.write(updatedNotes))
+    }
     //create a function to addNotes
 
     //create a function to removeNotes **by id** YOU CANNOT DO THIS WITHOUT GETTING UUIDV1 TO WORK
