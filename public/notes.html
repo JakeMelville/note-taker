@@ -33,9 +33,21 @@
         <input class="note-title" placeholder="Note Title" maxlength="28" type="text">
         <textarea class="note-textarea" placeholder="Note Text"></textarea>
       </div>
+
     </div>
   </div>
-  <script src="/assets/js/index.js"></script>
+  <script src="/assets/js/index.js">
+
+  const saveBtn = document.querySelector(".save-note");
+
+  saveBtn.addEventListener('click', () {
+    fetch('/api/notes', {
+      method: 'GET',
+      
+  
+    }
+}
+  </script>
 </body>
 
 </html>

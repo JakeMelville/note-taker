@@ -1,14 +1,22 @@
 const store = require('../db/store');
 
 module.exports = (app) => {
-    app.get('/api/notes', (req, res) => res.json(store));
+    app.get('/notes', (req, res) => {
+        store
+            .getNotes()
+            .then((notes) => {
+                return res.json(notes);
+            })
+            .catch((err) => res.status(500).json(err))
+    });
 
-    app.post('/api/notes', (req, res) => {
-        if (store) {
-            store.push(req.body);
-            res.json(true);
-        }
-    })
+    app.post('/notes', (req, res) => {
+        store
+            .write(notes)
+            .then((notes) => {
+                return res.json(notes)
+            })
+    });
 };
 
 
@@ -54,7 +62,7 @@ module.exports = (app) => {
 //     .then((notes) => {
 //         return res.json(notes)
 //     })
-    
+
 // })
 
 //create a post request 
