@@ -1,20 +1,50 @@
-//import items needed
+const store = require('../db/store');
 
-const router = require('express').Router();
-// const store = require('../db/store');
+module.exports = (app) => {
+    app.get('/api/notes', (req, res) => res.json(store));
+
+    app.post('/api/notes', (req, res) => {
+        if (store) {
+            store.push(req.body);
+            res.json(true);
+        }
+    })
+};
 
 
-router.get('/publiuc/notes', (req, res) => {
-    res.send({ data: "here is your api data"});
-});
-// make a GET request with all notes from the data base
 
-// router.get('/', (req, res) => {
-//     store
-//     .getNotes()
-//     .then((notes) => {
-//         return res.json(notes);
-//     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //import items needed
+
+
+// const router = require('express').Router();
+// // const store = require('../db/store');
+
+
+// router.get('/publiuc/notes', (req, res) => {
+//     res.send({ data: "here is your api data"});
+// });
+// // make a GET request with all notes from the data base
+
+// // router.get('/', (req, res) => {
+// //     store
+// //     .getNotes()
+// //     .then((notes) => {
+// //         return res.json(notes);
+// //     })
 //     .catch((err) => res.status(500).json(err))
 // });
 
@@ -32,4 +62,4 @@ router.get('/publiuc/notes', (req, res) => {
 //create a delete request 
 
 
-module.exports = router;
+// module.exports = router;

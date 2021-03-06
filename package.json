@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/JakeMelville/note-taker#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "uuid": "^8.3.2",
+    "uuidv1": "^1.6.14"
   }
 }
