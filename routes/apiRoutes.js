@@ -1,21 +1,25 @@
+const router = require('express').Router();
 const store = require('../db/store');
+const path = require('path');
 
-module.exports = (app) => {
-    app.get('/notes', (req, res) => {
+
+module.exports = (router) => {
+    router.get('/notes', (req, res) => {
         store
-            .getNotes()
+            getNotes()
             .then((notes) => {
                 return res.json(notes);
             })
             .catch((err) => res.status(500).json(err))
     });
 
-    app.post('/notes', (req, res) => {
+    router.post('/notes', (req, res) => {
         store
-            .write(notes)
+            addNotes(req.body)
             .then((notes) => {
-                return res.json(notes)
+                return res.json(notes) 
             })
+            .catch((err) => res.status(500).json(err))
     });
 };
 
