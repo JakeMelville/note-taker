@@ -36,6 +36,8 @@ class Store {
         return this.getNotes().then(notes => {
             const newNoteList = [...notes, newNote]; // Creates a new array with the memebers of the array notes and adds newNote to the end
             console.log(newNoteList);
+            const ret = this.write(newNoteList);
+            console.log("return value:", ret);
             return this.write(newNoteList);
         })
     }
