@@ -33,9 +33,9 @@ class Store {
         const { title, text } = note;
         const userNote = { title, text, id: uuidv1.v1() }
         return this.getNotes()
-        .then(notes => [...notes, userNote])
-        .then(newNotes => this.write(newNotes))
-        .then(() => userNote)
+            .then(notes => [...notes, userNote])
+            .then(newNotes => this.write(newNotes))
+            .then(() => userNote)
     }
     removeNote(id) {
         // console.log("remove notes");
@@ -55,16 +55,3 @@ class Store {
 //export new stroe
 
 module.exports = new Store();
-
-// addNotes(newNote) {
-//     return this.getNotes().then(notes => {
-//         const newNoteList = [...notes, newNote]; // Creates a new array with the memebers of the array notes and adds newNote to the end
-//         // console.log("add notes-get notes", newNoteList);
-
-//         // const ret = this.write(newNoteList);
-//         // console.log("return value:", ret);
-//         return this.write(newNoteList)
-//             .then(() => newNoteList);
-//     })
-//         .catch(err => console.error(err));
-// }
