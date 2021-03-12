@@ -3,8 +3,9 @@ const store = require('../db/store');
 const path = require('path');
 
 
-module.exports = (router) => {
-    router.get('/api/notes', (req, res) => {
+//module.exports = (router) => {
+    router.get('/notes', (req, res) => {
+        console.log('get /api/notes')
         store
             .getNotes()
             .then((notes) => {
@@ -14,7 +15,7 @@ module.exports = (router) => {
             .catch((err) => res.status(500).json(err))
     });
 
-    router.post('/api/notes', (req, res) => {
+    router.post('/notes', (req, res) => {
         store
             .addNotes(req.body)
             .then((notes) => {
@@ -23,7 +24,7 @@ module.exports = (router) => {
             })
             .catch((err) => res.status(500).json(err))
     });
-};
+//};
 
 
 
@@ -75,5 +76,4 @@ module.exports = (router) => {
 
 //create a delete request 
 
-
-// module.exports = router;
+ module.exports = router;
