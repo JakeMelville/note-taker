@@ -2,10 +2,8 @@ const router = require('express').Router();
 const store = require('../db/store');
 const path = require('path');
 
-
-//module.exports = (router) => {
     router.get('/notes', (req, res) => {
-        console.log('get /api/notes')
+        console.log('get /notes')
         store
             .getNotes()
             .then((notes) => {
@@ -24,7 +22,19 @@ const path = require('path');
             })
             .catch((err) => res.status(500).json(err))
     });
-//};
+
+    router.delete('/notes/:id', (req, res) => {
+        store  
+            .removeNote()
+            .then((notes) => {
+                return res.json(notes)
+            })
+
+        console.log("req id:", req.body.id)
+    })
+
+    
+ module.exports = router;
 
 
 
@@ -75,5 +85,3 @@ const path = require('path');
 //create a post request 
 
 //create a delete request 
-
- module.exports = router;

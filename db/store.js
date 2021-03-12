@@ -11,9 +11,6 @@ const writeFileAsync = util.promisify(fs.writeFile);
 //create out class
 
 class Store {
-    // constructor() {
-    //     this.idNote = 0;
-    // }
     read() {
         return readFileAsync('db/db.json', 'utf8')
     }
@@ -40,16 +37,18 @@ class Store {
             // const ret = this.write(newNoteList);
             // console.log("return value:", ret);
             return this.write(newNoteList)
-            .then(() => newNoteList);
+                .then(() => newNoteList);
         })
-        .catch(err => console.error(err));
+            .catch(err => console.error(err));
     }
-    // removeNote(id) {
-    //     console.log("remove notes");
-    //     return this.getNotes()
-    //         .then(notes => notes.filter(note => note.id !== parseInt(id)))
-    //         .then(updatedNotes => this.write(updatedNotes))
-    // }
+    removeNote(id) {
+        console.log("remove notes");
+        return this.getNotes()
+            .then(notes => notes.filter(note => note.id !== parseInt(id)))
+            .then(updatedNotes => this.write(updatedNotes))
+    }
+
+
     //create a function to addNotes
 
     //create a function to removeNotes **by id** YOU CANNOT DO THIS WITHOUT GETTING UUIDV1 TO WORK
