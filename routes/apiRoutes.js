@@ -1,40 +1,37 @@
 const router = require('express').Router();
 const store = require('../db/store');
-const path = require('path');
+// const path = require('path');
 
-    router.get('/notes', (req, res) => {
-        console.log('get /notes')
-        store
-            .getNotes()
-            .then((notes) => {
-                console.log("store-get-notes:", notes);
-                return res.json(notes);
-            })
-            .catch((err) => res.status(500).json(err))
-    });
+router.get('/notes', (req, res) => {
+    console.log('get /notes')
+    store
+        .getNotes()
+        .then((notes) => {
+            // console.log("store-get-notes:", notes);
+            return res.json(notes);
+        })
+        .catch((err) => res.status(500).json(err))
+});
 
-    router.post('/notes', (req, res) => {
-        store
-            .addNotes(req.body)
-            .then((notes) => {
-                console.log("store.addNotes:", notes)
-                return res.json(notes) 
-            })
-            .catch((err) => res.status(500).json(err))
-    });
+router.post('/notes', (req, res) => {
+    store
+        .addNotes(req.body)
+        .then(notes => res.json(notes))
+        .catch(err => res.status(500).json(err));
+});
 
-    router.delete('/notes/:id', (req, res) => {
-        store  
-            .removeNote()
-            .then((notes) => {
-                return res.json(notes)
-            })
+router.delete('/notes/:id', (req, res) => {
+    store
+        .removeNote(req.params.id)
+        .then(() => res.json({ ok: true }))
+        .catch(err => res.status(500).json(err));
+})
 
-        console.log("req id:", req.body.id)
-    })
 
-    
- module.exports = router;
+
+
+
+module.exports = router;
 
 
 
